@@ -11,12 +11,19 @@
  */
 class Solution {
 public:
-    bool isSameTree(TreeNode* p, TreeNode* q) {
-        if (p == nullptr && q == nullptr)
-            return true;
-        if (p == nullptr || q == nullptr)
-            return false; 
-        
-        return (p->val == q->val) && isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+
+    vector<int> answ;
+
+    void postOrder(TreeNode* root) {
+        if (root != nullptr) {
+            postOrder(root->left);
+            postOrder(root->right);
+            answ.push_back(root->val);
+        }
+    } 
+    
+    vector<int> postorderTraversal(TreeNode* root) {
+        postOrder(root);
+        return answ;
     }
 };

@@ -11,12 +11,18 @@
  */
 class Solution {
 public:
-    bool isSameTree(TreeNode* p, TreeNode* q) {
-        if (p == nullptr && q == nullptr)
-            return true;
-        if (p == nullptr || q == nullptr)
-            return false; 
-        
-        return (p->val == q->val) && isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+    vector<int> answ;
+
+    void preorderTraversalFunc(TreeNode *T) {
+        if (T != nullptr) {
+            answ.push_back(T->val);
+            preorderTraversal(T->left);
+            preorderTraversal(T->right);
+        }
+    }
+
+    vector<int> preorderTraversal(TreeNode* root) {
+        preorderTraversalFunc(root);
+        return answ;
     }
 };
